@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20250310095735_SetPrimaryKeyCol.cs" />
+    <Compile Remove="Migrations\20250310095735_SetPrimaryKeyCol.Designer.cs" />
+    <Compile Remove="Migrations\20250310100816_SetCompositeKeyCol.cs" />
+    <Compile Remove="Migrations\20250310100816_SetCompositeKeyCol.Designer.cs" />
+    <Compile Remove="Migrations\20250310102314_defualtvalueKeyCol.cs" />
+    <Compile Remove="Migrations\20250310102314_defualtvalueKeyCol.Designer.cs" />
+    <Compile Remove="Model\Employee.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">

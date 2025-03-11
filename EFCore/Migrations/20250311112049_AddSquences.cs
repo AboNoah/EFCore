@@ -5,23 +5,26 @@
 namespace EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class PostTable : Migration
+    public partial class AddSquences : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "OrderNamber");
+
             migrationBuilder.CreateTable(
-                name: "AuditEntry",
+                name: "Orders",
                 columns: table => new
                 {
-                    AuditEntryId = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Action = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OrderNo = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "NEXT VALUE FOR OrderNamber"),
+                    Amount = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AuditEntry", x => x.AuditEntryId);
+                    table.PrimaryKey("PK_Orders", x => x.ID);
                 });
         }
 
@@ -29,7 +32,10 @@ namespace EFCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AuditEntry");
+                name: "Orders");
+
+            migrationBuilder.DropSequence(
+                name: "OrderNamber");
         }
     }
 }

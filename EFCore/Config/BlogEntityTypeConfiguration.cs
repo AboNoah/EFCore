@@ -13,9 +13,9 @@ namespace EFCore.Config
     {
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
-            builder
-                .Property(b => b.Url)
-                .IsRequired();
+            //builder
+            //    .Property(b => b.Url)
+            //    .IsRequired();
         }
     }
 }

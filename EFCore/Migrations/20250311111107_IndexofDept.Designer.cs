@@ -3,6 +3,7 @@ using EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ApplictionDBContext))]
-    partial class ApplictionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250311111107_IndexofDept")]
+    partial class IndexofDept
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,8 +23,6 @@ namespace EFCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.HasSequence("OrderNamber");
 
             modelBuilder.Entity("EFCore.Model.Blog", b =>
                 {
@@ -189,27 +190,6 @@ namespace EFCore.Migrations
                     b.ToTable("ManyPost");
                 });
 
-            modelBuilder.Entity("EFCore.Model.Order", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<long>("OrderNo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasDefaultValueSql("NEXT VALUE FOR OrderNamber");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("EFCore.Model.PostTag", b =>
                 {
                     b.Property<int>("TagsId")
@@ -222,7 +202,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex("PostsId");
 
-                    b.ToTable("PostTags");
+                    b.ToTable("PostTag");
                 });
 
             modelBuilder.Entity("EFCore.Model.Tag", b =>
@@ -233,13 +213,9 @@ namespace EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("EFCore.Model.TestPost", b =>
@@ -249,10 +225,6 @@ namespace EFCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -13,8 +13,8 @@ namespace EFCore.Config
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.Property(e => e.Name)
-                .IsRequired();
+            //builder.Property(e => e.Name)
+            //    .IsRequired();
         }
     }
 }

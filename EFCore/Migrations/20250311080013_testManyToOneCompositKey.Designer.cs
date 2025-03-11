@@ -3,6 +3,7 @@ using EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ApplictionDBContext))]
-    partial class ApplictionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250311080013_testManyToOneCompositKey")]
+    partial class testManyToOneCompositKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,8 +23,6 @@ namespace EFCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.HasSequence("OrderNamber");
 
             modelBuilder.Entity("EFCore.Model.Blog", b =>
                 {
@@ -63,17 +64,11 @@ namespace EFCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DeptID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DeptID");
 
                     b.ToTable("Companies");
                 });
@@ -114,17 +109,15 @@ namespace EFCore.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("FullName", "Position");
 
                     b.ToTable("Employees");
                 });
@@ -189,76 +182,6 @@ namespace EFCore.Migrations
                     b.ToTable("ManyPost");
                 });
 
-            modelBuilder.Entity("EFCore.Model.Order", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<long>("OrderNo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasDefaultValueSql("NEXT VALUE FOR OrderNamber");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("EFCore.Model.PostTag", b =>
-                {
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PostsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TagsId", "PostsId");
-
-                    b.HasIndex("PostsId");
-
-                    b.ToTable("PostTags");
-                });
-
-            modelBuilder.Entity("EFCore.Model.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("EFCore.Model.TestPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestPosts");
-                });
-
             modelBuilder.Entity("EFCore.Model.BlogHeader", b =>
                 {
                     b.HasOne("EFCore.Model.Blog", "Blog")
@@ -306,25 +229,6 @@ namespace EFCore.Migrations
                     b.Navigation("ManyBlog");
                 });
 
-            modelBuilder.Entity("EFCore.Model.PostTag", b =>
-                {
-                    b.HasOne("EFCore.Model.TestPost", "TestPost")
-                        .WithMany("PostTags")
-                        .HasForeignKey("PostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCore.Model.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tag");
-
-                    b.Navigation("TestPost");
-                });
-
             modelBuilder.Entity("EFCore.Model.Blog", b =>
                 {
                     b.Navigation("Header");
@@ -343,16 +247,6 @@ namespace EFCore.Migrations
             modelBuilder.Entity("EFCore.Model.ManyBlog", b =>
                 {
                     b.Navigation("ManyPosts");
-                });
-
-            modelBuilder.Entity("EFCore.Model.Tag", b =>
-                {
-                    b.Navigation("PostTags");
-                });
-
-            modelBuilder.Entity("EFCore.Model.TestPost", b =>
-                {
-                    b.Navigation("PostTags");
                 });
 #pragma warning restore 612, 618
         }
