@@ -8,13 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20250310095735_SetPrimaryKeyCol.cs" />
-    <Compile Remove="Migrations\20250310095735_SetPrimaryKeyCol.Designer.cs" />
-    <Compile Remove="Migrations\20250310100816_SetCompositeKeyCol.cs" />
-    <Compile Remove="Migrations\20250310100816_SetCompositeKeyCol.Designer.cs" />
-    <Compile Remove="Migrations\20250310102314_defualtvalueKeyCol.cs" />
-    <Compile Remove="Migrations\20250310102314_defualtvalueKeyCol.Designer.cs" />
-    <Compile Remove="Model\Employee.cs" />
+    <Compile Remove="ApplictionDBContext_Old.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +18,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
