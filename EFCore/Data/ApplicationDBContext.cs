@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EFCore.Models;
+using EFCore.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Data;
@@ -39,10 +40,14 @@ public partial class ApplicationDBContext : DbContext
     public virtual DbSet<Tag> Tags { get; set; }
 
     public virtual DbSet<TestPost> TestPosts { get; set; }
+    public virtual DbSet<Book> Books { get; set; }
+    public virtual DbSet<Author> Authors { get; set; }
+    public virtual DbSet<Nationality> Nationalities { get; set; }
+    public virtual DbSet<BookDto> BookDtos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=localhost\\SQLEXPRESS;database=EFCoreDB;User Id=sa;Password=123;Encrypt=false;MultipleActiveResultSets=true");
+        => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("server=localhost\\SQLEXPRESS;database=EFCoreDB;User Id=sa;Password=123;Encrypt=false;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

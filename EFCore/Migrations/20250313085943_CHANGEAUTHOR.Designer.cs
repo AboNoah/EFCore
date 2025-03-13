@@ -3,6 +3,7 @@ using EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250313085943_CHANGEAUTHOR")]
+    partial class CHANGEAUTHOR
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex("NationalityId");
 
-                    b.ToTable("Authors", (string)null);
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("EFCore.Models.Blog", b =>
@@ -55,7 +58,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blogs", (string)null);
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("EFCore.Models.BlogHeader", b =>
@@ -74,7 +77,7 @@ namespace EFCore.Migrations
                     b.HasIndex(new[] { "BlogId" }, "IX_BlogHeader_BlogId")
                         .IsUnique();
 
-                    b.ToTable("BlogHeader", (string)null);
+                    b.ToTable("BlogHeader");
                 });
 
             modelBuilder.Entity("EFCore.Models.Book", b =>
@@ -99,7 +102,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("EFCore.Models.Company", b =>
@@ -125,7 +128,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex(new[] { "DeptId" }, "IX_Companies_DeptID");
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("EFCore.Models.CompanyTest", b =>
@@ -151,7 +154,7 @@ namespace EFCore.Migrations
                     b.HasIndex(new[] { "TestId", "TestName" }, "AK_CompanyTest_TestId_TestName")
                         .IsUnique();
 
-                    b.ToTable("CompanyTest", (string)null);
+                    b.ToTable("CompanyTest");
                 });
 
             modelBuilder.Entity("EFCore.Models.Employee", b =>
@@ -179,7 +182,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex(new[] { "FullName", "Position" }, "IX_Employees_FullName_Position");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("EFCore.Models.EmployeeTest", b =>
@@ -208,7 +211,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex(new[] { "TestId", "TestName" }, "IX_EmployeeTests_TestId_TestName");
 
-                    b.ToTable("EmployeeTests", (string)null);
+                    b.ToTable("EmployeeTests");
                 });
 
             modelBuilder.Entity("EFCore.Models.ManyBlog", b =>
@@ -221,7 +224,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ManyBlogs", (string)null);
+                    b.ToTable("ManyBlogs");
                 });
 
             modelBuilder.Entity("EFCore.Models.ManyPost", b =>
@@ -239,7 +242,7 @@ namespace EFCore.Migrations
 
                     b.HasIndex(new[] { "BlogId" }, "IX_ManyPost_BlogId");
 
-                    b.ToTable("ManyPost", (string)null);
+                    b.ToTable("ManyPost");
                 });
 
             modelBuilder.Entity("EFCore.Models.Nationality", b =>
@@ -256,7 +259,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Nationalities", (string)null);
+                    b.ToTable("Nationalities");
                 });
 
             modelBuilder.Entity("EFCore.Models.Order", b =>
@@ -278,7 +281,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("EFCore.Models.Stock", b =>
@@ -322,7 +325,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stocks", (string)null);
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("EFCore.Models.Tag", b =>
@@ -341,7 +344,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("EFCore.Models.TestPost", b =>
@@ -360,7 +363,7 @@ namespace EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TestPosts", (string)null);
+                    b.ToTable("TestPosts");
                 });
 
             modelBuilder.Entity("PostTag", b =>
